@@ -29,12 +29,13 @@ private:
 	void render();
 	
 	void setupFontAndText();
-	void setUpRectangle(); 
+	void setUpRectangles(); 
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_ArialBlackfont; // font used by message
 	sf::Text m_welcomeMessage; // text used for message on screen
-	sf::RectangleShape m_firstRectangle; // first testing triangle 
+	sf::RectangleShape m_redRectangle; // first testing triangle 
+	sf::RectangleShape m_yellowRectangle;
 	bool m_exitGame; // control exiting game
 
 };
