@@ -18,7 +18,10 @@
 /// </summary>
 Game::Game() :
 	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "SFML Game" },
-	m_redRectangle{ sf::Vector2f{200.0f, 200.0f}},  
+	m_redRectangle{ sf::Vector2f{200.0f, 200.0f} },
+	m_yellowRectangle{ sf::Vector2f{200.0f, 200.0f} },
+	m_greenRectangle{ sf::Vector2f{200.0f, 200.0f} }, 
+	m_blueRectangle{sf::Vector2f{200.0f, 200.0f}}, 
 	m_exitGame{false} //when true game will exit
 	
 {
@@ -116,6 +119,9 @@ void Game::render()
 	m_window.draw(m_welcomeMessage);
 	m_window.draw(m_redRectangle);
 	m_window.draw(m_yellowRectangle);
+	m_window.draw(m_blueRectangle); 
+	m_window.draw(m_greenRectangle); 
+
 	m_window.display();
 }
 
@@ -142,13 +148,20 @@ void Game::setupFontAndText()
 void Game::setUpRectangles()
 {	
 	// red rectangle set up 
-	m_redRectangle.setFillColor(sf::Color::Red); 
+	m_redRectangle.setFillColor(sf::Color(0, 0, 0, 255)); 
 	m_redRectangle.setPosition(200.0f, 200.0f);
 
 	// yellow rectangle set up 
-
 	m_yellowRectangle.setFillColor(sf::Color::Yellow); 
 	m_yellowRectangle.setPosition(400.0f, 400.0f); 
+
+	//blue rectangle set up 
+	m_blueRectangle.setFillColor(sf::Color::Blue); 
+	m_blueRectangle.setPosition(400.0f, 200.0f); 
+
+	//green rectangle set up
+	m_greenRectangle.setFillColor(sf::Color::Green); 
+	m_greenRectangle.setPosition(200.0f, 400.0f); 
 }
 
 /// <summary>
