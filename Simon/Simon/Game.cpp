@@ -134,6 +134,10 @@ void Game::setupFontAndText()
 
 }
 
+void Game::setUpRectangle()
+{
+}
+
 /// <summary>
 /// load the texture and setup the sprite for the logo
 /// </summary>

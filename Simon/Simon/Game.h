@@ -29,7 +29,7 @@ private:
 	void render();
 	
 	void setupFontAndText();
-
+	void setUpRectangle(); 
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_ArialBlackfont; // font used by message
