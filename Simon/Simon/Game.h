@@ -34,6 +34,7 @@ private:
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_ArialBlackfont; // font used by message
 	sf::Text m_welcomeMessage; // text used for message on screen
+	sf::RectangleShape m_firstRectangle; // first testing triangle 
 	bool m_exitGame; // control exiting game
 
 };

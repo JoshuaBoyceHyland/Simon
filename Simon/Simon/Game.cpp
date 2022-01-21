@@ -18,9 +18,12 @@
 /// </summary>
 Game::Game() :
 	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "SFML Game" },
+	m_firstRectangle{ sf::Vector2f{200.0f, 200.0f}},  
 	m_exitGame{false} //when true game will exit
+	
 {
 	setupFontAndText(); // load font 
+	setUpRectangle(); 
 }
 
 /// <summary>
@@ -111,6 +114,7 @@ void Game::render()
 {
 	m_window.clear(sf::Color::White);
 	m_window.draw(m_welcomeMessage);
+	m_window.draw(m_firstRectangle);
 	m_window.display();
 }
 
@@ -124,7 +128,7 @@ void Game::setupFontAndText()
 		std::cout << "problem loading arial black font" << std::endl;
 	}
 	m_welcomeMessage.setFont(m_ArialBlackfont);
-	m_welcomeMessage.setString("SFML Game");
+	m_welcomeMessage.setString("");
 	m_welcomeMessage.setStyle(sf::Text::Underlined | sf::Text::Italic | sf::Text::Bold);
 	m_welcomeMessage.setPosition(40.0f, 40.0f);
 	m_welcomeMessage.setCharacterSize(80U);
@@ -135,7 +139,9 @@ void Game::setupFontAndText()
 }
 
 void Game::setUpRectangle()
-{
+{	
+	m_firstRectangle.setFillColor(sf::Color::Red); 
+	m_firstRectangle.setPosition(200.0f, 200.0f);
 }
 
 /// <summary>
