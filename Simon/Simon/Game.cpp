@@ -25,7 +25,8 @@ Game::Game() :
 	m_exitGame{false} //when true game will exit
 	
 {
-	setupFontAndText(); // load font 
+	setupTitle(); // load font 
+	setUpMenuContents(); 
 	setUpRectangles(); 
 }
 
@@ -117,6 +118,10 @@ void Game::render()
 {
 	m_window.clear(sf::Color::Black);
 	m_window.draw(m_simonTitle);
+	m_window.draw(m_easyText); 
+	m_window.draw(m_normalText);
+	m_window.draw(m_hardText); 
+	m_window.draw(m_exitText); 
 	m_window.draw(m_redRectangle);
 	m_window.draw(m_yellowRectangle);
 	m_window.draw(m_blueRectangle); 
@@ -128,13 +133,13 @@ void Game::render()
 /// <summary>
 /// load the font and setup the text message for screen
 /// </summary>
-void Game::setupFontAndText()
+void Game::setupTitle()
 {
-	if (!m_ArialBlackfont.loadFromFile("ASSETS\\FONTS\\Race Sport Free.ttf"))
+	if (!m_raceSportFont.loadFromFile("ASSETS\\FONTS\\Race Sport Free.ttf"))
 	{
-		std::cout << "problem loading arial black font" << std::endl;
+		std::cout << "problem loading font" << std::endl;
 	}
-	m_simonTitle.setFont(m_ArialBlackfont);
+	m_simonTitle.setFont(m_raceSportFont);
 	m_simonTitle.setString("Simon");
 	m_simonTitle.setPosition(20.0f, 30.0f);
 	m_simonTitle.setCharacterSize(80U);
@@ -143,11 +148,51 @@ void Game::setupFontAndText()
 
 }
 
+void Game::setUpMenuContents()
+{
+	if (!m_raceSportFont.loadFromFile("ASSETS\\FONTS\\Race Sport Free.ttf"))
+	{
+		std::cout << "problem loading font"<<std::endl; 
+	}
+	// easy mode 
+	m_easyText.setFont(m_raceSportFont); 
+	m_easyText.setString("Easy mode"); 
+	m_easyText.setPosition(20.0f, 150.0f); 
+	m_easyText.setCharacterSize(35U);
+	m_easyText.setFillColor(sf::Color::Blue); 
+	m_easyText.setOutlineThickness(3.0f); 
+
+	// normal mode
+	m_normalText.setFont(m_raceSportFont); 
+	m_normalText.setString("Normal mode"); 
+	m_normalText.setPosition(20.0f, 240.0f); 
+	m_normalText.setCharacterSize(35U); 
+	m_normalText.setFillColor(sf::Color::Yellow); 
+	m_normalText.setOutlineThickness(3.0f);
+	
+	//hard mode 
+	m_hardText.setFont(m_raceSportFont); 
+	m_hardText.setString("Hard Mode"); 
+	m_hardText.setPosition(20.0f, 330.0f); 
+	m_hardText.setCharacterSize(35U); 
+	m_hardText.setFillColor(sf::Color::Green); 
+	m_hardText.setOutlineThickness(3.0f); 
+
+	// Exit text
+	m_exitText.setFont(m_raceSportFont); 
+	m_exitText.setString("Exit Game"); 
+	m_exitText.setPosition(20.0f, 420.0f); 
+	m_exitText.setCharacterSize(35U); 
+	m_exitText.setFillColor(sf::Color::Red); 
+	m_exitText.setOutlineThickness(3.0f); 
+
+}
+
 void Game::setUpRectangles()
 {	
 	// red rectangle set up 
 	m_redRectangle.setFillColor(sf::Color(180, 0, 0, 255)); 
-	m_redRectangle.setPosition(370.0f, 120.0f);
+	m_redRectangle.setPosition(580.0f, 330.0f);
 
 	// yellow rectangle set up 
 	m_yellowRectangle.setFillColor(sf::Color::Yellow); 
@@ -155,7 +200,7 @@ void Game::setUpRectangles()
 
 	//blue rectangle set up 
 	m_blueRectangle.setFillColor(sf::Color::Blue); 
-	m_blueRectangle.setPosition(580.0f, 330.0f); 
+	m_blueRectangle.setPosition(370.0f, 120.0f); 
 
 	//green rectangle set up
 	m_greenRectangle.setFillColor(sf::Color::Green); 

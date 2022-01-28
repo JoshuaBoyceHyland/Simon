@@ -28,12 +28,17 @@ private:
 	void update(sf::Time t_deltaTime);
 	void render();
 	
-	void setupFontAndText();
+	void setupTitle();
+	void setUpMenuContents(); 
 	void setUpRectangles(); 
 
 	sf::RenderWindow m_window; // main SFML window
-	sf::Font m_ArialBlackfont; // font used by message
+	sf::Font m_raceSportFont; // font used by message
 	sf::Text m_simonTitle; // text used for message on screen
+	sf::Text m_easyText; // text for easy mode
+	sf::Text m_normalText; // text for normal mode
+	sf::Text m_hardText; // Text for hard mode
+	sf::Text m_exitText; // exit text
 	sf::RectangleShape m_redRectangle; 
 	sf::RectangleShape m_yellowRectangle;
 	sf::RectangleShape m_blueRectangle; 
