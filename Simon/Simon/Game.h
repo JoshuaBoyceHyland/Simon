@@ -33,7 +33,7 @@ private:
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_ArialBlackfont; // font used by message
-	sf::Text m_welcomeMessage; // text used for message on screen
+	sf::Text m_simonTitle; // text used for message on screen
 	sf::RectangleShape m_redRectangle; 
 	sf::RectangleShape m_yellowRectangle;
 	sf::RectangleShape m_blueRectangle; 

@@ -115,8 +115,8 @@ void Game::update(sf::Time t_deltaTime)
 /// </summary>
 void Game::render()
 {
-	m_window.clear(sf::Color::White);
-	m_window.draw(m_welcomeMessage);
+	m_window.clear(sf::Color::Black);
+	m_window.draw(m_simonTitle);
 	m_window.draw(m_redRectangle);
 	m_window.draw(m_yellowRectangle);
 	m_window.draw(m_blueRectangle); 
@@ -130,38 +130,36 @@ void Game::render()
 /// </summary>
 void Game::setupFontAndText()
 {
-	if (!m_ArialBlackfont.loadFromFile("ASSETS\\FONTS\\ariblk.ttf"))
+	if (!m_ArialBlackfont.loadFromFile("ASSETS\\FONTS\\Race Sport Free.ttf"))
 	{
 		std::cout << "problem loading arial black font" << std::endl;
 	}
-	m_welcomeMessage.setFont(m_ArialBlackfont);
-	m_welcomeMessage.setString("");
-	m_welcomeMessage.setStyle(sf::Text::Underlined | sf::Text::Italic | sf::Text::Bold);
-	m_welcomeMessage.setPosition(40.0f, 40.0f);
-	m_welcomeMessage.setCharacterSize(80U);
-	m_welcomeMessage.setOutlineColor(sf::Color::Red);
-	m_welcomeMessage.setFillColor(sf::Color::Black);
-	m_welcomeMessage.setOutlineThickness(3.0f);
+	m_simonTitle.setFont(m_ArialBlackfont);
+	m_simonTitle.setString("Simon");
+	m_simonTitle.setPosition(20.0f, 30.0f);
+	m_simonTitle.setCharacterSize(80U);
+	m_simonTitle.setFillColor(sf::Color::Yellow);
+	m_simonTitle.setOutlineThickness(3.0f);
 
 }
 
 void Game::setUpRectangles()
 {	
 	// red rectangle set up 
-	m_redRectangle.setFillColor(sf::Color(0, 0, 0, 255)); 
-	m_redRectangle.setPosition(200.0f, 200.0f);
+	m_redRectangle.setFillColor(sf::Color(180, 0, 0, 255)); 
+	m_redRectangle.setPosition(370.0f, 120.0f);
 
 	// yellow rectangle set up 
 	m_yellowRectangle.setFillColor(sf::Color::Yellow); 
-	m_yellowRectangle.setPosition(400.0f, 400.0f); 
+	m_yellowRectangle.setPosition(580.0f, 120.0f); 
 
 	//blue rectangle set up 
 	m_blueRectangle.setFillColor(sf::Color::Blue); 
-	m_blueRectangle.setPosition(400.0f, 200.0f); 
+	m_blueRectangle.setPosition(580.0f, 330.0f); 
 
 	//green rectangle set up
 	m_greenRectangle.setFillColor(sf::Color::Green); 
-	m_greenRectangle.setPosition(200.0f, 400.0f); 
+	m_greenRectangle.setPosition(370.0f, 330.0f); 
 }
 
 /// <summary>
