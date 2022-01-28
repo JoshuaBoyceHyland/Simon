@@ -208,6 +208,6 @@ void Game::setUpRectangles()
 }
 
 /// <summary>
-/// load the texture and setup the sprite for the logo
+/// loads in the triangles 
 /// </summary>
 
