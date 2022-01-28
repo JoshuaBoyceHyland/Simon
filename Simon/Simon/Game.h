@@ -11,6 +11,12 @@
 /// </summary>
 #include <SFML/Graphics.hpp>
 
+enum class GameMode {
+	Showing, 
+	Recieveing, 
+	GameOver, 
+	Starting
+};
 class Game
 {
 public:
@@ -33,17 +39,22 @@ private:
 	void setUpRectangles(); 
 
 	sf::RenderWindow m_window; // main SFML window
-	sf::Font m_raceSportFont; // font used by message
+	sf::Font m_raceSportFont; // font 
+	
+	// text
 	sf::Text m_simonTitle; // text used for message on screen
 	sf::Text m_easyText; // text for easy mode
 	sf::Text m_normalText; // text for normal mode
 	sf::Text m_hardText; // Text for hard mode
 	sf::Text m_exitText; // exit text
+	
+	// different rectangles
 	sf::RectangleShape m_redRectangle; 
 	sf::RectangleShape m_yellowRectangle;
 	sf::RectangleShape m_blueRectangle; 
 	sf::RectangleShape m_greenRectangle; 
 	
+	GameMode m_currentGameMode; // games curren stage 
 	bool m_exitGame; // control exiting game
 
 };

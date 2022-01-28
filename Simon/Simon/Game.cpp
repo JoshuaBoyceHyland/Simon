@@ -105,6 +105,25 @@ void Game::processKeys(sf::Event t_event)
 /// <param name="t_deltaTime">time interval per frame</param>
 void Game::update(sf::Time t_deltaTime)
 {
+	switch (m_currentGameMode)
+	{
+	case GameMode::Starting:
+
+		break; 
+
+	case GameMode::Showing:
+
+		break; 
+	
+	case GameMode::Recieveing:
+
+		break; 
+
+	case GameMode::GameOver:
+
+		break; 
+
+	}
 	if (m_exitGame)
 	{
 		m_window.close();
@@ -131,7 +150,7 @@ void Game::render()
 }
 
 /// <summary>
-/// load the font and setup the text message for screen
+/// sets up the title
 /// </summary>
 void Game::setupTitle()
 {
@@ -148,6 +167,9 @@ void Game::setupTitle()
 
 }
 
+/// <summary>
+/// sets up the four sets of text (easy, normal, hard and exit)
+/// </summary>
 void Game::setUpMenuContents()
 {
 	if (!m_raceSportFont.loadFromFile("ASSETS\\FONTS\\Race Sport Free.ttf"))
@@ -188,6 +210,9 @@ void Game::setUpMenuContents()
 
 }
 
+/// <summary>
+/// loads in the rectangles 
+/// </summary>
 void Game::setUpRectangles()
 {	
 	// red rectangle set up 
@@ -207,7 +232,5 @@ void Game::setUpRectangles()
 	m_greenRectangle.setPosition(370.0f, 330.0f); 
 }
 
-/// <summary>
-/// loads in the triangles 
-/// </summary>
+
 
