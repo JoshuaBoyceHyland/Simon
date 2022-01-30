@@ -11,6 +11,12 @@
 /// </summary>
 #include <SFML/Graphics.hpp>
 
+enum class GameMode {
+	Showing, 
+	Recieveing, 
+	GameOver, 
+	Starting
+};
 class Game
 {
 public:
@@ -26,20 +32,39 @@ private:
 	void processEvents();
 	void processKeys(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
+	void startingUpdate(); 
 	void render();
 	
-	void setupFontAndText();
-	void setUpRectangles(); 
+	void setupTitle(); // simon title 
+	void setUpMenuContents(); // menu option 
+	void setUpRectangles();// sets up the 4 rectangles
+	void resetButtons();  // once button is pressed will rest them so a press on them can be detected again
+	void processGameEvents(sf::Event& t_event); 
+
 
 	sf::RenderWindow m_window; // main SFML window
-	sf::Font m_ArialBlackfont; // font used by message
-	sf::Text m_welcomeMessage; // text used for message on screen
+	sf::Font m_raceSportFont; // font 
+	
+	// text
+	sf::Text m_simonTitle; // text used for message on screen
+	sf::Text m_easyText; // text for easy mode
+	sf::Text m_normalText; // text for normal mode
+	sf::Text m_hardText; // Text for hard mode
+	sf::Text m_exitText; // exit text
+	
+	// different rectangles
 	sf::RectangleShape m_redRectangle; 
 	sf::RectangleShape m_yellowRectangle;
 	sf::RectangleShape m_blueRectangle; 
 	sf::RectangleShape m_greenRectangle; 
 	
+	GameMode m_currentGameMode; // games curren stage 
 	bool m_exitGame; // control exiting game
+
+	bool m_redButtonPress; 
+	bool m_yellowButtonPress; 
+	bool m_blueButtonPress; 
+	bool m_greenButtonPress; 
 
 };
 
