@@ -148,7 +148,7 @@ void Game::setupFontAndText()
 void Game::setUpRectangles()
 {	
 	// red rectangle set up 
-	m_redRectangle.setFillColor(sf::Color(0, 0, 0, 255)); 
+	m_redRectangle.setFillColor(sf::Color::Red);//(180, 0, 0, 255)); 
 	m_redRectangle.setPosition(200.0f, 200.0f);
 
 	// yellow rectangle set up 
