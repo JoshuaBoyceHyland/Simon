@@ -34,9 +34,11 @@ private:
 	void update(sf::Time t_deltaTime);
 	void render();
 	
-	void setupTitle();
-	void setUpMenuContents(); 
-	void setUpRectangles(); 
+	void setupTitle(); // simon title 
+	void setUpMenuContents(); // menu option 
+	void setUpRectangles();// sets up the 4 rectangles
+	void resetButtons();  // once button is pressed will rest them so a press on them can be detected again
+	void processGameEvents(sf::Event& t_event); 
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_raceSportFont; // font 
@@ -56,6 +58,11 @@ private:
 	
 	GameMode m_currentGameMode; // games curren stage 
 	bool m_exitGame; // control exiting game
+
+	bool m_redButtonPress = false; 
+	bool m_yellowButtonPress = false; 
+	bool m_blueButtonPress = false; 
+	bool m_greenButtonPress = false; 
 
 };
 

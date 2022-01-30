@@ -93,7 +93,7 @@ void Game::processEvents()
 /// <param name="t_event">key press event</param>
 void Game::processKeys(sf::Event t_event)
 {
-	if (sf::Keyboard::Escape == t_event.key.code)
+	if (m_blueButtonPress == true)//if (sf::Keyboard::Escape == t_event.key.code)
 	{
 		m_exitGame = true;
 	}
@@ -136,11 +136,13 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::Black);
+	//text
 	m_window.draw(m_simonTitle);
 	m_window.draw(m_easyText); 
 	m_window.draw(m_normalText);
 	m_window.draw(m_hardText); 
 	m_window.draw(m_exitText); 
+	// rectangles
 	m_window.draw(m_redRectangle);
 	m_window.draw(m_yellowRectangle);
 	m_window.draw(m_blueRectangle); 
@@ -230,6 +232,24 @@ void Game::setUpRectangles()
 	//green rectangle set up
 	m_greenRectangle.setFillColor(sf::Color::Green); 
 	m_greenRectangle.setPosition(370.0f, 330.0f); 
+}
+
+/// <summary>
+/// resets the buttons to detect another press after inital one 
+/// </summary>
+void Game::resetButtons()
+{
+	m_redButtonPress = false;
+	m_yellowButtonPress = false; 
+	m_blueButtonPress = false; 
+	m_greenButtonPress = false; 
+}
+
+void Game::processGameEvents(sf::Event& t_event)
+{
+	float blueL = 370.0f;
+	float blueR = 570.0f; 
+
 }
 
 
