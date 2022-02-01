@@ -40,6 +40,7 @@ private:
 	void setUpRectangles();// sets up the 4 rectangles
 	void resetButtons();  // once button is pressed will rest them so a press on them can be detected again
 	void processGameEvents(sf::Event& t_event); 
+	void noteRandomiser(); 
 
 
 	sf::RenderWindow m_window; // main SFML window
@@ -65,6 +66,14 @@ private:
 	bool m_yellowButtonPress; 
 	bool m_blueButtonPress; 
 	bool m_greenButtonPress; 
+
+	int m_notes[32];
+
+	int m_difficulty; 
+
+	int m_currentNote;
+
+	int m_currentCount; 
 
 };
 

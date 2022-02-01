@@ -132,6 +132,36 @@ void Game::update(sf::Time t_deltaTime)
 
 void Game::startingUpdate()
 {
+	
+
+	if (m_blueButtonPress)
+	{
+		noteRandomiser(); 
+		m_difficulty = 8; 
+		m_currentCount = 1; 
+		m_currentNote = 0; 
+
+	}
+	if (m_yellowButtonPress)
+	{
+		noteRandomiser(); 
+		m_currentGameMode = GameMode::Showing; 
+		m_difficulty = 16; 
+		m_currentCount = 1; 
+		m_currentNote = 0; 
+
+	}
+
+	if (m_greenButtonPress)
+	{
+		noteRandomiser(); 
+		m_currentGameMode = GameMode::Showing; 
+		m_difficulty = 32; 
+		m_currentCount = 1; 
+		m_currentNote = 0; 
+
+	}
+
 	if (m_redButtonPress)
 	{
 		m_window.close(); 
@@ -253,12 +283,13 @@ void Game::resetButtons()
 	m_greenButtonPress = false; 
 }
 
+/// <summary>
+/// detects which button is pressed
+/// </summary>
+/// <param name="t_event">mosue click</param>
 void Game::processGameEvents(sf::Event& t_event)
 {
-	
 
-	
-	
 	float row1Top = 120.0f;
 	float row1Bottom = 320.0f;
 	
@@ -301,6 +332,14 @@ void Game::processGameEvents(sf::Event& t_event)
 
 
 
+}
+
+void Game::noteRandomiser()
+{
+	for (int index = 0; index < 32; index++)
+	{
+		m_notes[index] = std::rand() % 4; // trying to find some values of 0, 1, 2, 3
+	}
 }
 
 
