@@ -1,4 +1,5 @@
 /// <summary>
+/// 
 /// author Pete Lowe May 2019
 /// you need to change the above line or lose marks
 /// </summary>
@@ -10,6 +11,7 @@
 /// Don't forget the endif at the bottom
 /// </summary>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 enum class GameMode {
 	Showing, 
@@ -41,6 +43,8 @@ private:
 	void resetButtons();  // once button is pressed will rest them so a press on them can be detected again
 	void processGameEvents(sf::Event& t_event); 
 	void noteRandomiser(); 
+	void setBufferAndPitch(); 
+
 
 
 	sf::RenderWindow m_window; // main SFML window
@@ -61,19 +65,25 @@ private:
 	
 	GameMode m_currentGameMode; // games curren stage 
 	bool m_exitGame; // control exiting game
-
+	
+	// bools for button presses 
 	bool m_redButtonPress; 
 	bool m_yellowButtonPress; 
 	bool m_blueButtonPress; 
 	bool m_greenButtonPress; 
 
-	int m_notes[32];
+	// 
+	int m_notes[32];// array for notes
+	int m_difficulty;// difficulty settings
+	int m_currentNote;// current note count 
+	int m_currentCount;// the length of the current length of the sequence
 
-	int m_difficulty; 
-
-	int m_currentNote;
-
-	int m_currentCount; 
+	// sounds 
+	sf::SoundBuffer m_toneBuffer; // used to store tone wave 
+	sf::Sound m_redTone; 
+	sf::Sound m_yellowTone; 
+	sf::Sound m_blueTone; 
+	sf::Sound m_greenTone; 
 
 };
 

@@ -144,8 +144,7 @@ void Game::startingUpdate()
 	}
 	if (m_yellowButtonPress)
 	{
-		noteRandomiser(); 
-		m_currentGameMode = GameMode::Showing; 
+		noteRandomiser();  
 		m_difficulty = 16; 
 		m_currentCount = 1; 
 		m_currentNote = 0; 
@@ -155,11 +154,9 @@ void Game::startingUpdate()
 	if (m_greenButtonPress)
 	{
 		noteRandomiser(); 
-		m_currentGameMode = GameMode::Showing; 
 		m_difficulty = 32; 
 		m_currentCount = 1; 
 		m_currentNote = 0; 
-
 	}
 
 	if (m_redButtonPress)
@@ -248,6 +245,7 @@ void Game::setUpMenuContents()
 	m_exitText.setFillColor(sf::Color::Red); 
 	m_exitText.setOutlineThickness(3.0f); 
 
+	setBufferAndPitch(); // 
 }
 
 /// <summary>
@@ -340,6 +338,22 @@ void Game::noteRandomiser()
 	{
 		m_notes[index] = std::rand() % 4; // trying to find some values of 0, 1, 2, 3
 	}
+}
+
+void Game::setBufferAndPitch()
+{
+	if (m_toneBuffer.loadFromFile("ASSETS\\AUDIO\\.wav"))
+	{
+		std::cout << "Could not load audio" << std::endl; 
+	}
+	m_redTone.setBuffer(m_toneBuffer); 
+	m_yellowTone.setBuffer(m_toneBuffer); 
+	m_yellowTone.setPitch(0.85f); 
+	m_yellowTone.play(); 
+	m_blueTone.setBuffer(m_toneBuffer); 
+	m_blueTone.setPitch(0.7f); 
+	m_greenTone.setBuffer(m_toneBuffer); 
+	m_greenTone.setPitch(0.55f); 
 }
 
 
