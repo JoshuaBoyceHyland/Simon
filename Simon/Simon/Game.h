@@ -79,7 +79,7 @@ private:
 	int m_currentCount;// the length of the current length of the sequence
 
 	// sounds 
-	sf::SoundBuffer m_toneBuffer; // used to store tone wave 
+	sf::SoundBuffer m_toneBuffer; // used to store tone
 	sf::Sound m_redTone; 
 	sf::Sound m_yellowTone; 
 	sf::Sound m_blueTone; 

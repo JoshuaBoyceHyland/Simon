@@ -342,18 +342,20 @@ void Game::noteRandomiser()
 
 void Game::setBufferAndPitch()
 {
-	if (m_toneBuffer.loadFromFile("ASSETS\\AUDIO\\.wav"))
+	if (!m_toneBuffer.loadFromFile("ASSETS\\AUDIO\\tone.wav"))
 	{
 		std::cout << "Could not load audio" << std::endl; 
 	}
 	m_redTone.setBuffer(m_toneBuffer); 
 	m_yellowTone.setBuffer(m_toneBuffer); 
-	m_yellowTone.setPitch(0.85f); 
-	m_yellowTone.play(); 
+	m_yellowTone.setPitch(0.85f); // this makes the same audio sound different 
+	//m_yellowTone.play(); 
 	m_blueTone.setBuffer(m_toneBuffer); 
-	m_blueTone.setPitch(0.7f); 
+	m_blueTone.setPitch(0.7f); // changes the audio 
+	//m_blueTone.play(); 
 	m_greenTone.setBuffer(m_toneBuffer); 
 	m_greenTone.setPitch(0.55f); 
+	m_greenTone.play(); 
 }
 
 
