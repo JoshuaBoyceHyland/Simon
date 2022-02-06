@@ -45,7 +45,8 @@ private:
 	void noteRandomiser(); 
 	void setBufferAndPitch();// sets up sound for buttons 
 	void buttonTimers(); // timer for button colours
-	void showingUpdate(); 
+	void showingUpdate(); // shows plauer seequence to copy
+	void recievingUpdate(); // player input
 
 
 

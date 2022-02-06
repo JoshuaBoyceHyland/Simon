@@ -144,9 +144,9 @@ void Game::startingUpdate()
 
 	if (m_blueButtonPress)
 	{
-		m_currentCount = 8; // temp 
+		m_currentCount = 1;  
 		m_currentNote = 0; 
-		m_difficulty = 8; // temp
+		m_difficulty = 8; 
 		m_modeChangeTimer = 0; 
 		m_currentGameMode = GameMode::Showing; 
 		m_flashTime = 30; 
@@ -159,12 +159,12 @@ void Game::startingUpdate()
 	}
 	if (m_yellowButtonPress)
 	{
-		m_currentCount = 16; // temp
+		m_currentCount = 1; 
 		m_currentNote = 0;
 		m_difficulty = 16; 
 		m_modeChangeTimer = 0; 
 		m_currentGameMode = GameMode::Showing; 
-		m_flashTime = 15; //temp
+		m_flashTime = 30; //temp
 
 
 
@@ -177,12 +177,12 @@ void Game::startingUpdate()
 
 	if (m_greenButtonPress)
 	{
-		m_currentCount = 32;// temp 
+		m_currentCount = 1;// temp 
 		m_currentNote = 0; 
 		m_difficulty = 32; 
 		m_modeChangeTimer = 0; 
 		m_currentGameMode = GameMode::Showing; 
-		m_flashTime = 15; // temp
+		m_flashTime = 30; // temp
 		
 		noteRandomiser(); 
 		m_difficulty = 32; 
@@ -204,10 +204,13 @@ void Game::render()
 	m_window.clear(sf::Color::Black);
 	//text
 	m_window.draw(m_simonTitle);
-	m_window.draw(m_easyText); 
-	m_window.draw(m_normalText);
-	m_window.draw(m_hardText); 
-	m_window.draw(m_exitText); 
+	if (m_currentGameMode == GameMode::Starting)
+	{
+		m_window.draw(m_easyText);
+		m_window.draw(m_normalText);
+		m_window.draw(m_hardText);
+		m_window.draw(m_exitText);
+	}
 	// rectangles
 	m_window.draw(m_redRectangle);
 	m_window.draw(m_yellowRectangle);
@@ -482,4 +485,8 @@ void Game::showingUpdate()
 		}
 	}
 	buttonTimers(); 
+}
+
+void Game::recievingUpdate()
+{
 }
