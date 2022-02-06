@@ -20,9 +20,10 @@ Game::Game() :
 	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "SFML Game" },
 	m_redRectangle{ sf::Vector2f{200.0f, 200.0f} },
 	m_yellowRectangle{ sf::Vector2f{200.0f, 200.0f} },
-	m_greenRectangle{ sf::Vector2f{200.0f, 200.0f} }, 
-	m_blueRectangle{sf::Vector2f{200.0f, 200.0f}}, 
-	m_currentGameMode{GameMode::Starting},
+	m_greenRectangle{ sf::Vector2f{200.0f, 200.0f} },
+	m_blueRectangle{ sf::Vector2f{200.0f, 200.0f} },
+	m_currentGameMode{ GameMode::Starting },
+	m_flashTime(15),
 	m_exitGame{false} //when true game will exit
 	
 {
@@ -128,6 +129,7 @@ void Game::update(sf::Time t_deltaTime)
 
 	}
 	resetButtons(); 
+	buttonTimers(); 
 }
 
 void Game::startingUpdate()
@@ -144,6 +146,11 @@ void Game::startingUpdate()
 	}
 	if (m_yellowButtonPress)
 	{
+		m_yellowTone.play(); 
+		m_yellowButtonTimer = m_flashTime; 
+		m_yellowRectangle.setFillColor(m_yellowRectangle.getFillColor() + sf::Color(64, 64, 64, 255)); 
+
+
 		noteRandomiser();  
 		m_difficulty = 16; 
 		m_currentCount = 1; 
@@ -153,6 +160,10 @@ void Game::startingUpdate()
 
 	if (m_greenButtonPress)
 	{
+		m_greenTone.play(); 
+		m_greenButtonTimer = m_flashTime;
+		m_greenRectangle.setFillColor(m_greenRectangle.getFillColor() + sf::Color(64, 64, 64, 355)); 
+		
 		noteRandomiser(); 
 		m_difficulty = 32; 
 		m_currentCount = 1; 
@@ -346,17 +357,53 @@ void Game::setBufferAndPitch()
 	{
 		std::cout << "Could not load audio" << std::endl; 
 	}
+	// red sound 
 	m_redTone.setBuffer(m_toneBuffer); 
+	// yellow sound 
 	m_yellowTone.setBuffer(m_toneBuffer); 
 	m_yellowTone.setPitch(0.85f); // this makes the same audio sound different 
-	//m_yellowTone.play(); 
+	//blue sound 
 	m_blueTone.setBuffer(m_toneBuffer); 
 	m_blueTone.setPitch(0.7f); // changes the audio 
-	//m_blueTone.play(); 
+	//green sound
 	m_greenTone.setBuffer(m_toneBuffer); 
 	m_greenTone.setPitch(0.55f); 
-	m_greenTone.play(); 
 }
 
+/// <summary>
+/// resets each button color, decrement each color timer
+/// </summary>
+void Game::buttonTimers()
+{
+	if (m_blueButtonTimer > 0)
+	{
+		if (0==--m_blueButtonTimer)
+		{
+			m_blueRectangle.setFillColor(sf::Color::Blue); 
+		}
+	}
 
+	if (m_redButtonTimer>0)
+	{
+		if (0==--m_redButtonTimer)
+		{
+			m_redRectangle.setFillColor(sf::Color::Red); 
+		}
+	}
+	
+	if (m_yellowButtonTimer > 0)
+	{
+		if (0 == --m_yellowButtonTimer)
+		{
+			m_yellowRectangle.setFillColor(sf::Color::Yellow); 
+		}
+	}
 
+	if (m_greenButtonTimer > 0)
+	{
+		if (0 == --m_greenButtonTimer)
+		{
+			m_greenRectangle.setFillColor(sf::Color::Green); 
+		}
+	}
+}

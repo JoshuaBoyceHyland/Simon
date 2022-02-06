@@ -43,7 +43,8 @@ private:
 	void resetButtons();  // once button is pressed will rest them so a press on them can be detected again
 	void processGameEvents(sf::Event& t_event); 
 	void noteRandomiser(); 
-	void setBufferAndPitch(); 
+	void setBufferAndPitch();// sets up sound for buttons 
+	void buttonTimers(); // timer for button colours
 
 
 
@@ -72,7 +73,7 @@ private:
 	bool m_blueButtonPress; 
 	bool m_greenButtonPress; 
 
-	// 
+	// sound setup 
 	int m_notes[32];// array for notes
 	int m_difficulty;// difficulty settings
 	int m_currentNote;// current note count 
@@ -83,7 +84,14 @@ private:
 	sf::Sound m_redTone; 
 	sf::Sound m_yellowTone; 
 	sf::Sound m_blueTone; 
-	sf::Sound m_greenTone; 
+	sf::Sound m_greenTone;
+
+// button timers for how long their colour is highlighed when they are pressed
+	int m_redButtonTimer; 
+	int m_yellowButtonTimer; 
+	int m_blueButtonTimer; 
+	int m_greenButtonTimer; 
+	int m_flashTime; // hpw long button flashes for 
 
 };
 
