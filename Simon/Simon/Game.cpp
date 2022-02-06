@@ -18,12 +18,19 @@
 /// </summary>
 Game::Game() :
 	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "SFML Game" },
+	// rectangle positions 
 	m_redRectangle{ sf::Vector2f{200.0f, 200.0f} },
 	m_yellowRectangle{ sf::Vector2f{200.0f, 200.0f} },
 	m_greenRectangle{ sf::Vector2f{200.0f, 200.0f} },
 	m_blueRectangle{ sf::Vector2f{200.0f, 200.0f} },
 	m_currentGameMode{ GameMode::Starting },
+	// timers 
 	m_flashTime(15),
+	m_redButtonTimer(0), 
+	m_yellowButtonTimer(0), 
+	m_blueButtonTimer(0),
+	m_greenButtonTimer(0),
+	
 	m_exitGame{false} //when true game will exit
 	
 {
@@ -116,7 +123,7 @@ void Game::update(sf::Time t_deltaTime)
 		break; 
 
 	case GameMode::Showing:
-
+		showingUpdate(); 
 		break; 
 	
 	case GameMode::Recieveing:
@@ -129,7 +136,6 @@ void Game::update(sf::Time t_deltaTime)
 
 	}
 	resetButtons(); 
-	buttonTimers(); 
 }
 
 void Game::startingUpdate()
@@ -138,6 +144,13 @@ void Game::startingUpdate()
 
 	if (m_blueButtonPress)
 	{
+		m_currentCount = 8; // temp 
+		m_currentNote = 0; 
+		m_difficulty = 8; // temp
+		m_modeChangeTimer = 0; 
+		m_currentGameMode = GameMode::Showing; 
+		m_flashTime = 30; 
+		
 		noteRandomiser(); 
 		m_difficulty = 8; 
 		m_currentCount = 1; 
@@ -146,9 +159,13 @@ void Game::startingUpdate()
 	}
 	if (m_yellowButtonPress)
 	{
-		m_yellowTone.play(); 
-		m_yellowButtonTimer = m_flashTime; 
-		m_yellowRectangle.setFillColor(m_yellowRectangle.getFillColor() + sf::Color(64, 64, 64, 255)); 
+		m_currentCount = 16; // temp
+		m_currentNote = 0;
+		m_difficulty = 16; 
+		m_modeChangeTimer = 0; 
+		m_currentGameMode = GameMode::Showing; 
+		m_flashTime = 15; //temp
+
 
 
 		noteRandomiser();  
@@ -160,9 +177,12 @@ void Game::startingUpdate()
 
 	if (m_greenButtonPress)
 	{
-		m_greenTone.play(); 
-		m_greenButtonTimer = m_flashTime;
-		m_greenRectangle.setFillColor(m_greenRectangle.getFillColor() + sf::Color(64, 64, 64, 355)); 
+		m_currentCount = 32;// temp 
+		m_currentNote = 0; 
+		m_difficulty = 32; 
+		m_modeChangeTimer = 0; 
+		m_currentGameMode = GameMode::Showing; 
+		m_flashTime = 15; // temp
 		
 		noteRandomiser(); 
 		m_difficulty = 32; 
@@ -229,7 +249,7 @@ void Game::setUpMenuContents()
 	m_easyText.setString("Easy mode"); 
 	m_easyText.setPosition(20.0f, 150.0f); 
 	m_easyText.setCharacterSize(35U);
-	m_easyText.setFillColor(sf::Color::Blue); 
+	m_easyText.setFillColor(BLUE); 
 	m_easyText.setOutlineThickness(3.0f); 
 
 	// normal mode
@@ -237,7 +257,7 @@ void Game::setUpMenuContents()
 	m_normalText.setString("Normal mode"); 
 	m_normalText.setPosition(20.0f, 240.0f); 
 	m_normalText.setCharacterSize(35U); 
-	m_normalText.setFillColor(sf::Color::Yellow); 
+	m_normalText.setFillColor(YELLOW); 
 	m_normalText.setOutlineThickness(3.0f);
 	
 	//hard mode 
@@ -245,7 +265,7 @@ void Game::setUpMenuContents()
 	m_hardText.setString("Hard Mode"); 
 	m_hardText.setPosition(20.0f, 330.0f); 
 	m_hardText.setCharacterSize(35U); 
-	m_hardText.setFillColor(sf::Color::Green); 
+	m_hardText.setFillColor(GREEN); 
 	m_hardText.setOutlineThickness(3.0f); 
 
 	// Exit text
@@ -253,7 +273,7 @@ void Game::setUpMenuContents()
 	m_exitText.setString("Exit Game"); 
 	m_exitText.setPosition(20.0f, 420.0f); 
 	m_exitText.setCharacterSize(35U); 
-	m_exitText.setFillColor(sf::Color::Red); 
+	m_exitText.setFillColor(RED); 
 	m_exitText.setOutlineThickness(3.0f); 
 
 	setBufferAndPitch(); // 
@@ -265,19 +285,19 @@ void Game::setUpMenuContents()
 void Game::setUpRectangles()
 {	
 	// red rectangle set up 
-	m_redRectangle.setFillColor(sf::Color(180, 0, 0, 255)); 
+	m_redRectangle.setFillColor(RED); 
 	m_redRectangle.setPosition(580.0f, 330.0f);
 
 	// yellow rectangle set up 
-	m_yellowRectangle.setFillColor(sf::Color::Yellow); 
+	m_yellowRectangle.setFillColor(YELLOW); 
 	m_yellowRectangle.setPosition(580.0f, 120.0f); 
 
 	//blue rectangle set up 
-	m_blueRectangle.setFillColor(sf::Color::Blue); 
+	m_blueRectangle.setFillColor(BLUE); 
 	m_blueRectangle.setPosition(370.0f, 120.0f); 
 
 	//green rectangle set up
-	m_greenRectangle.setFillColor(sf::Color::Green); 
+	m_greenRectangle.setFillColor(GREEN); 
 	m_greenRectangle.setPosition(370.0f, 330.0f); 
 }
 
@@ -379,7 +399,7 @@ void Game::buttonTimers()
 	{
 		if (0==--m_blueButtonTimer)
 		{
-			m_blueRectangle.setFillColor(sf::Color::Blue); 
+			m_blueRectangle.setFillColor(BLUE); 
 		}
 	}
 
@@ -387,7 +407,7 @@ void Game::buttonTimers()
 	{
 		if (0==--m_redButtonTimer)
 		{
-			m_redRectangle.setFillColor(sf::Color::Red); 
+			m_redRectangle.setFillColor(RED); 
 		}
 	}
 	
@@ -395,7 +415,7 @@ void Game::buttonTimers()
 	{
 		if (0 == --m_yellowButtonTimer)
 		{
-			m_yellowRectangle.setFillColor(sf::Color::Yellow); 
+			m_yellowRectangle.setFillColor(YELLOW); 
 		}
 	}
 
@@ -403,7 +423,63 @@ void Game::buttonTimers()
 	{
 		if (0 == --m_greenButtonTimer)
 		{
-			m_greenRectangle.setFillColor(sf::Color::Green); 
+			m_greenRectangle.setFillColor(GREEN); 
 		}
 	}
+}
+
+
+/// <summary>
+/// gives person break between modes
+/// changes light color if button is pressed 
+/// </summary>
+void Game::showingUpdate()
+{
+	if (m_modeChangeTimer > 0)
+	{
+		m_modeChangeTimer--; 
+	}
+	else
+	{
+		m_statusText.setString("Playing");
+		if (0 == m_blueButtonTimer && 0 == m_greenButtonTimer && 0 == m_redButtonTimer && 0 == m_yellowButtonTimer)
+		{
+			if (m_currentNote < m_currentCount)
+			{
+				switch (m_notes[m_currentNote])
+				{
+				case 0:
+					m_greenTone.play(); 
+					m_greenButtonTimer = m_flashTime; 
+					m_greenRectangle.setFillColor(m_greenRectangle.getFillColor() + sf::Color(64, 64, 64, 255));
+					break; 
+				case 1:
+					m_redTone.play(); 
+					m_redButtonTimer = m_flashTime; 
+					m_redRectangle.setFillColor(m_redRectangle.getFillColor() + sf::Color(64, 64, 64, 255)); 
+					break; 
+				case 2:
+					m_yellowTone.play(); 
+					m_yellowButtonTimer = m_flashTime;
+					m_yellowRectangle.setFillColor(m_yellowRectangle.getFillColor() + sf::Color(64, 64, 64, 255)); 
+					break; 
+				case 3:
+					m_blueTone.play(); 
+					m_blueButtonTimer = m_flashTime; 
+					m_blueRectangle.setFillColor(m_blueRectangle.getFillColor() + sf::Color(64, 64, 64, 255)); 
+					break; 
+
+				default:
+					break; 
+				}
+				m_currentNote++;
+			}
+			else
+			{
+				m_currentGameMode = GameMode::Recieveing; 
+				m_currentNote = 0; 
+			}
+		}
+	}
+	buttonTimers(); 
 }

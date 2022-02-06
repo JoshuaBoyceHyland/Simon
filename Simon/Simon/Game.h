@@ -45,6 +45,7 @@ private:
 	void noteRandomiser(); 
 	void setBufferAndPitch();// sets up sound for buttons 
 	void buttonTimers(); // timer for button colours
+	void showingUpdate(); 
 
 
 
@@ -64,6 +65,12 @@ private:
 	sf::RectangleShape m_blueRectangle; 
 	sf::RectangleShape m_greenRectangle; 
 	
+	// colours for rectangles 
+
+	const sf::Color RED{ 180, 0, 0, 255 };
+	const sf::Color YELLOW{ 180, 180, 0, 255 }; 
+	const sf::Color BLUE{ 0, 0, 180, 255 }; 
+	const sf::Color GREEN{ 0, 180, 0, 255 }; 
 	GameMode m_currentGameMode; // games curren stage 
 	bool m_exitGame; // control exiting game
 	
@@ -86,13 +93,18 @@ private:
 	sf::Sound m_blueTone; 
 	sf::Sound m_greenTone;
 
-// button timers for how long their colour is highlighed when they are pressed
+	// button timers for how long their colour is highlighed when they are pressed
 	int m_redButtonTimer; 
 	int m_yellowButtonTimer; 
 	int m_blueButtonTimer; 
 	int m_greenButtonTimer; 
 	int m_flashTime; // hpw long button flashes for 
 
+	// delay between the notes
+	int m_modeChangeTimer; 
+
+
+	sf::Text m_statusText; 
 };
 
 
