@@ -13,6 +13,13 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+// buttons for array, to check if what person is entering is write or not
+	const int GREEN_BUTTON = 0; 
+	const int RED_BUTTON = 1; 
+	const int YELLOW_BUTTON = 2;
+	const int BLUE_BUTTON = 3; 
+
+
 enum class GameMode {
 	Showing, 
 	Recieveing, 
@@ -46,7 +53,7 @@ private:
 	void setBufferAndPitch();// sets up sound for buttons 
 	void buttonTimers(); // timer for button colours
 	void showingUpdate(); // shows plauer seequence to copy
-	void recievingUpdate(); // player input
+	void recievingUpdate(sf::Time time); // player input
 	void overUpdate(); // game finshed 
 
 
@@ -60,6 +67,7 @@ private:
 	sf::Text m_normalText; // text for normal mode
 	sf::Text m_hardText; // Text for hard mode
 	sf::Text m_exitText; // exit text
+	sf::Text m_statusText;// status og game text 
 	
 	// different rectangles
 	sf::RectangleShape m_redRectangle; 
@@ -104,9 +112,13 @@ private:
 
 	// delay between the notes
 	int m_modeChangeTimer; 
-
+	
+	// activates win lose text
 	bool m_win; 
-	sf::Text m_statusText; 
+
+	//timer for the turn taking 
+	sf::Time m_inputTime; 
+	
 };
 
 

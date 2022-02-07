@@ -127,7 +127,7 @@ void Game::update(sf::Time t_deltaTime)
 		break; 
 	
 	case GameMode::Recieveing:
-
+		recievingUpdate(t_deltaTime);
 		break; 
 
 	case GameMode::GameOver:
@@ -496,8 +496,110 @@ void Game::showingUpdate()
 	buttonTimers(); 
 }
 
-void Game::recievingUpdate()
+/// <summary>
+/// checks the current button presses against the note its imitating 
+/// uses bools to check if the click is correct or not
+/// if note correct checks next note
+/// if mistake then haemover abd sets win to false
+/// </summary>
+/// <param name="time"></param>
+void Game::recievingUpdate(sf::Time time)
 {
+	bool correct = false; 
+	bool mistake = false; 
+
+	m_statusText.setString("Listening"); 
+
+	// checks for if same note as orginal sequence by program 
+	if (m_greenButtonPress)
+	{
+		m_greenRectangle.setFillColor(m_greenRectangle.getFillColor() + sf::Color(64, 64, 64, 255)); 
+		m_greenButtonTimer = m_flashTime;
+		m_greenTone.play(); 
+
+		if (GREEN_BUTTON == m_notes[m_currentNote])
+		{
+			correct = true; 
+		}
+		else
+		{
+			mistake = true; 
+		}
+
+	}
+
+	if (m_redButtonPress)
+	{
+		m_redRectangle.setFillColor(m_redRectangle.getFillColor() + sf::Color(64, 64, 64, 255)); 
+		m_redButtonTimer = m_flashTime; 
+		m_redTone.play();
+
+		if (RED_BUTTON == m_notes[m_currentNote])
+		{
+			correct = true; 
+		}
+		else
+		{
+			mistake = true; 
+		}
+
+	}
+
+	if (m_yellowButtonPress)
+	{
+		m_yellowRectangle.setFillColor(m_yellowRectangle.getFillColor() + sf::Color(64, 64, 64, 255)); 
+		m_yellowButtonTimer = m_flashTime; 
+		m_yellowTone.play(); 
+
+		if (YELLOW_BUTTON == m_notes[m_currentNote])
+		{
+			correct = true; 
+		}
+
+		else
+		{
+			mistake = true; 
+		}
+	}
+
+	if (m_blueButtonPress)
+	{
+		m_blueRectangle.setFillColor(m_blueRectangle.getFillColor() + sf::Color(64, 64, 64, 255));
+		m_blueButtonTimer = m_flashTime;
+		m_blueTone.play();
+
+		if (BLUE_BUTTON == m_notes[m_currentNote])
+		{
+			correct = true;
+		}
+
+		else
+		{
+			mistake = true; 
+		}
+	}
+
+	// check for mistake 
+
+	if (mistake)
+	{
+		m_currentGameMode = GameMode::GameOver; 
+		m_win = false; 
+		m_modeChangeTimer = 120; 
+	}
+
+	if (!correct && !mistake)
+	{
+		m_inputTime += time; 
+	}
+
+	else
+	{
+		m_inputTime = sf::seconds(0);
+	}
+	buttonTimers(); 
+
+
 }
 
 /// <summary>
