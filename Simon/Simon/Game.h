@@ -47,6 +47,7 @@ private:
 	void buttonTimers(); // timer for button colours
 	void showingUpdate(); // shows plauer seequence to copy
 	void recievingUpdate(); // player input
+	void overUpdate(); // game finshed 
 
 
 
@@ -104,7 +105,7 @@ private:
 	// delay between the notes
 	int m_modeChangeTimer; 
 
-
+	bool m_win; 
 	sf::Text m_statusText; 
 };
 

@@ -131,7 +131,7 @@ void Game::update(sf::Time t_deltaTime)
 		break; 
 
 	case GameMode::GameOver:
-
+		overUpdate(); 
 		break; 
 
 	}
@@ -164,7 +164,7 @@ void Game::startingUpdate()
 		m_difficulty = 16; 
 		m_modeChangeTimer = 0; 
 		m_currentGameMode = GameMode::Showing; 
-		m_flashTime = 30; //temp
+		m_flashTime = 30; 
 
 
 
@@ -172,22 +172,23 @@ void Game::startingUpdate()
 		m_difficulty = 16; 
 		m_currentCount = 1; 
 		m_currentNote = 0; 
-
+		
 	}
 
 	if (m_greenButtonPress)
 	{
-		m_currentCount = 1;// temp 
+		m_currentCount = 1;
 		m_currentNote = 0; 
 		m_difficulty = 32; 
 		m_modeChangeTimer = 0; 
 		m_currentGameMode = GameMode::Showing; 
-		m_flashTime = 30; // temp
+		m_flashTime = 30; 
 		
 		noteRandomiser(); 
 		m_difficulty = 32; 
 		m_currentCount = 1; 
 		m_currentNote = 0; 
+
 	}
 
 	if (m_redButtonPress)
@@ -216,6 +217,8 @@ void Game::render()
 	m_window.draw(m_yellowRectangle);
 	m_window.draw(m_blueRectangle); 
 	m_window.draw(m_greenRectangle); 
+
+	m_window.draw(m_statusText); 
 
 	m_window.display();
 }
@@ -279,6 +282,12 @@ void Game::setUpMenuContents()
 	m_exitText.setFillColor(RED); 
 	m_exitText.setOutlineThickness(3.0f); 
 
+	// status text
+	m_statusText.setFont(m_raceSportFont); 
+	m_statusText.setFillColor(sf::Color::White); 
+	m_statusText.setCharacterSize(22);
+	m_statusText.setPosition(200, 30); 
+	m_statusText.setString(""); 
 	setBufferAndPitch(); // 
 }
 
@@ -489,4 +498,51 @@ void Game::showingUpdate()
 
 void Game::recievingUpdate()
 {
+}
+
+/// <summary>
+/// runs down count down timer and plays a winning tone or losing tone
+/// switches mode to starting once finished 
+/// </summary>
+void Game::overUpdate()
+{
+	if (!m_win)
+	{
+		m_statusText.setString("Game ovr, you Lost!");
+			if (m_modeChangeTimer-- > 0)
+			{
+				if (m_modeChangeTimer % 25 == 0)
+				{
+					m_yellowTone.play(); 
+				}
+			}
+			else 
+			{
+				m_currentGameMode = GameMode::Starting; 
+			}
+	}
+
+	else
+	{
+		m_statusText.setString("Game over, you Won!"); 
+		
+		if (m_modeChangeTimer-->0)
+		{
+			if (m_modeChangeTimer % 50 == 0)
+			{
+				m_blueTone.play(); 
+			}
+			else
+			{
+				if (m_modeChangeTimer % 25 == 0)
+				{
+					m_redTone.play(); 
+				}
+			}
+		}
+		else {
+			m_currentGameMode = GameMode::Starting; 
+		}
+	}
+	buttonTimers(); 
 }
